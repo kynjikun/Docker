@@ -1,0 +1,21 @@
+For Local Deployment with Playframework:
+
+Docker run:
+  - make sure to mount the volumes for:
+    /app - the working directory bind the project here
+
+    /<docker-user>/.sbt - store the playframework build
+    /<docker-user>/.cache - jar/artifacts/maven
+  
+In the current image build <docker-user> was not specified so it defaults to root.
+e.g 
+  docker run --rm \
+    -it \
+    --mount type=bind,source=./project,target=/app \
+    --mount type=bind,source=./caches/sbt,target=/root/.sbt \
+    --mount type=bind,source=./caches/cache,target=/root/.cache \
+    -p 9000:9000 \
+    <image_id>
+
+docker-compose:
+  TBA
